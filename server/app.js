@@ -1,6 +1,8 @@
 var express = require('express');
 var bodyParser = require('body-parser')
 var app = express();
+var Web3 = require('web3');
+var web3 = new Web3('http://localhost:8545');
 
 app.use(bodyParser.json())
 app.use((req, res, next) => {
@@ -18,8 +20,15 @@ app.use((req, res, next) => {
 });
 
 app.post('/meta', function(req, res) {
-    const { txdata, from, to, msg, signature } = req.body
+    let { txdata, from, to, msg, signature } = req.body
     console.log('access to meta route', txdata, from, to, msg, signature)
+    web3.eth.sendTransaction({
+      from: from,
+      to: to,
+      data: txdata
+    }).then(function(receipt){
+      console.log(receipt)
+    })
     res.status(200).send({message: "succeeded to create transaction"})
 })
 
