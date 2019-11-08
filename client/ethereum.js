@@ -1,5 +1,6 @@
 const ethers = require('ethers');
 const utils = ethers.utils;
+const newMessage = "update message"
 
 let privateKey = "0x3141592653589793238462643383279502884197169399375105820974944592"
 let wallet = new ethers.Wallet(privateKey)

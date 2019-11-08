@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "ethers": "^4.0.38",
+    "express": "^4.17.1",
     "solc": "^0.4.16"
   }
 }
