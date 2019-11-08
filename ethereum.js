@@ -1,5 +1,4 @@
 const ethers = require('ethers');
-const Wallet = ethers.wallet;
 const utils = ethers.utils;
 
 let privateKey = "0x3141592653589793238462643383279502884197169399375105820974944592"
@@ -16,6 +15,8 @@ let transaction = {
     data: "0x",
     chainId: ethers.utils.getNetwork('homestead').chainId
 }
+
+console.log(transaction)
 
 let signPromise = wallet.sign(transaction)
 console.log("success" + signPromise)
