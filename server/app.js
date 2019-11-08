@@ -21,3 +21,5 @@ app.post('/meta', function(req, res) {
     const {  } = req.body
     res.status(200).send({message: "succeeded to create transaction"})
 })
+
+module.exports = app;
