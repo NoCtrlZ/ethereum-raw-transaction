@@ -10,7 +10,7 @@ let wallet = new ethers.Wallet(privateKey)
 console.log(wallet.address)
 
 let transaction = {
-    to: process.env.CONTRACT_ADDRESS,
+    to: process.env.RELAY_ADDRESS,
     value: 0,
     nonce: 1000, // nonce must match the one at TxRelay contract
     gas: 2000000,
@@ -23,17 +23,15 @@ let signPromise = wallet.sign(transaction)
 signPromise.then((rawTransaction) => {
 
     console.log(rawTransaction);
+    axios.post('http://localhost:3000/meta', {
+        sig: rawTransaction,
+        to: "account_y",
+        from: "account_x",
+        data: "message"
+    })
 
     let tx = ethers.utils.parseTransaction(rawTransaction);
 
     console.log(tx)
 
-})
-
-axios.post('http://localhost:3000/meta', {
-    txdata: "txdata",
-    from: "account_x",
-    to: "account_y",
-    msg: "message",
-    signature: "signature"
 })
