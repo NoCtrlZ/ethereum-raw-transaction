@@ -1,27 +1,24 @@
 const axios = require('axios')
 const ethers = require('ethers');
+require('dotenv').config()
 const utils = ethers.utils;
 const newMessage = "update message"
 
-let privateKey = "0x3141592653589793238462643383279502884197169399375105820974944592"
+let privateKey = process.env.USER_PRIVATEKEY
 let wallet = new ethers.Wallet(privateKey)
 
 console.log(wallet.address)
 
 let transaction = {
-    nonce: 1000,
-    gasLimit: 21000,
-    gasPrice: utils.bigNumberify("20000000000"),
-    to: "0x88a5C2d9919e46F883EB62F7b8Dd9d0CC45bc290",
-    value: utils.parseEther("1.0"),
-    data: "0x",
-    chainId: ethers.utils.getNetwork('homestead').chainId
+    to: process.env.CONTRACT_ADDRESS,
+    value: 0,
+    nonce: 1000, // nonce must match the one at TxRelay contract
+    gas: 2000000,
+    gasPrice: 2000000,
+    gasLimit: 2000000
 }
 
-console.log(transaction)
-
 let signPromise = wallet.sign(transaction)
-console.log("success" + signPromise)
 
 signPromise.then((rawTransaction) => {
 
