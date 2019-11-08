@@ -18,7 +18,8 @@ app.use((req, res, next) => {
 });
 
 app.post('/meta', function(req, res) {
-    const {  } = req.body
+    const { txdata, from, to, msg, signature } = req.body
+    console.log('access to meta route', txdata, from, to, msg, signature)
     res.status(200).send({message: "succeeded to create transaction"})
 })
 

@@ -1,3 +1,4 @@
+const axios = require('axios')
 const ethers = require('ethers');
 const utils = ethers.utils;
 const newMessage = "update message"
@@ -30,4 +31,12 @@ signPromise.then((rawTransaction) => {
 
     console.log(tx)
 
+})
+
+axios.post('http://localhost:3000/meta', {
+    txdata: "txdata",
+    from: "account_x",
+    to: "account_y",
+    msg: "message",
+    signature: "signature"
 })
